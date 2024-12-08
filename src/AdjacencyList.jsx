@@ -84,7 +84,8 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList }) => {
   return (
     <div>
       {/* AdjacencyList Area */}
-      <div className="p-8 text-white w-full h-[600px] flex flex-col items-start overflow-auto border rounded shadow-md text-center">
+      <p className="text-center font-bold text-lg mb-2">Adjacency List</p>
+      <div className="p-8 text-white w-full h-[240px] flex flex-col items-start overflow-auto border rounded shadow-md text-center">
         <table className="w-full border-collapse">
           <thead>
             <tr>

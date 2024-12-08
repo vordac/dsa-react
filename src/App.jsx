@@ -31,7 +31,7 @@ function App() {
             <p>Graph</p>
           </div>
           <button
-            className="px-4 py-2 bg-blue-500 text-white rounded font-bold"
+            className="px-4 py-2 text-white rounded font-bold"
             onClick={navigateGraph}
           >
             Start
@@ -42,7 +42,7 @@ function App() {
             Binary Tree
           </div>
           <button
-            className="px-4 py-2 bg-blue-500 text-white rounded font-bold"
+            className="px-4 py-2 text-white rounded font-bold"
             onClick={navigateBinTree}
           >
             Start

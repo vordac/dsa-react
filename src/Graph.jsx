@@ -49,11 +49,11 @@ function Graph() {
             width={1200}
             height={720}
             nodeLabel="id"
-            nodeRelSize={8}
-            linkDirectionalParticles={4}
+            nodeRelSize={6}
+            linkDirectionalParticles={2}
             linkDirectionalParticleSpeed={0.01}
             linkWidth={(link) => link.weight}
-            linkDirectionalArrowLength={4}
+            linkDirectionalArrowLength={6}
             linkDirectionalArrowRelPos={1}
             nodeAutoColorBy="group"
             linkCanvasObject={(link, ctx, globalScale) => {

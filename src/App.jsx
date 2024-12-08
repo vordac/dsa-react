@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+import "./App.css";
+import Graph from "./Graph";
+import BinTree from "./BinTree";
 
 function App() {
-  const [count, setCount] = useState(0)
+  let navigate = useNavigate();
+
+  const navigateGraph = () => {
+    let path = `/graph`;
+    navigate(path);
+  };
+
+  const navigateBinTree = () => {
+    let path = `/bintree`;
+    navigate(path);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <div className="flex gap-x-4">
+        <div className="flex flex-col items-center justify-center gap-4">
+          <div className="flex flex-col items-center justify-center text-center w-[256px] h-[300px] bg-red-500 text-lg rounded-md font-bold">
+            <p>Directed</p>
+            <p>Weighted</p>
+            <p>Graph</p>
+          </div>
+          <button className="font-bold" onClick={navigateGraph}>
+            Start
+          </button>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-4">
+          <div className="flex items-center justify-center text-center w-[256px] h-[300px] bg-blue-500 text-lg rounded-md font-bold">
+            Binary Tree
+          </div>
+          <button className="font-bold" onClick={navigateBinTree}>
+            Start
+          </button>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+function Main() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/graph" element={<Graph />} />
+        <Route path="/bintree" element={<BinTree />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default Main;

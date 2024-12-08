@@ -1,8 +1,9 @@
+// Graph.jsx
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AdjacencyList from "./AdjacencyList";
 import ForceGraph2D from "react-force-graph-2d";
-import { bellmanFord } from "./bellmanFord";
+import BellmanFord from "./BellmanFord";
 
 function Graph() {
   const navigate = useNavigate();
@@ -34,14 +35,12 @@ function Graph() {
       alert("Please select a start node.");
       return;
     }
-    const result = bellmanFord(adjacencyList, startNode);
-    if (result) {
-      setShortestPaths(result);
-    }
+    // Установите startNode для компонента BellmanFord
+    setShortestPaths(startNode);
   };
 
   return (
-    <div className="flex flex-col overflow-hidden">
+    <div className="flex flex-col overflow-hidden-x">
       <div className="flex">
         {/* Adjacency List Area*/}
         <div className="flex flex-col w-[600px] p-4">
@@ -52,6 +51,14 @@ function Graph() {
               setAdjacencyList={setAdjacencyList}
               setStartNode={setStartNode} // Передайте функцию для выбора начальной вершины
             />
+            <p className="text-center font-bold text-lg m-4">Bellman-Ford</p>
+
+            {shortestPaths && (
+              <BellmanFord
+                adjacencyList={adjacencyList}
+                startNode={startNode}
+              />
+            )}
           </div>
         </div>
 
@@ -120,10 +127,12 @@ function Graph() {
               className="px-4 py-2 text-white rounded"
               onClick={runBellmanFord}
             >
-              Start
+              Run
             </button>
-            <button className="px-4 py-2 text-white rounded">Stop</button>
+            <button className="px-4 py-2 text-white rounded">Pause</button>
             <button className="px-4 py-2 text-white rounded">Back</button>
+            <button className="px-4 py-2 text-white rounded">Forward</button>
+            <button className="px-4 py-2 text-white rounded">Reset</button>
             <button
               className="px-4 py-2 text-white rounded"
               onClick={navigateApp}
@@ -133,22 +142,6 @@ function Graph() {
           </div>
         </div>
       </div>
-
-      {/* Shortest Paths Result */}
-      {shortestPaths && (
-        <div className="p-4">
-          <h2>Shortest Paths from {startNode}</h2>
-          <ul>
-            {Array.from(shortestPaths.distances.entries()).map(
-              ([node, distance]) => (
-                <li key={node}>
-                  {node}: {distance}
-                </li>
-              )
-            )}
-          </ul>
-        </div>
-      )}
     </div>
   );
 }

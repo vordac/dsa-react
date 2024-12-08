@@ -1,16 +1,18 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+// BellmanFord.jsx
+import React from "react";
 
-function BellmanFord() {
+const BellmanFord = ({ adjacencyList, startNode }) => {
   const distances = new Map();
   const predecessors = new Map();
 
+  // Инициализация расстояний
   for (const node of adjacencyList.keys()) {
     distances.set(node, Infinity);
     predecessors.set(node, null);
   }
   distances.set(startNode, 0);
 
+  // Релаксация ребер
   for (let i = 0; i < adjacencyList.size - 1; i++) {
     for (const [node, edges] of adjacencyList.entries()) {
       for (const [neighbor, weight] of edges.entries()) {
@@ -22,6 +24,7 @@ function BellmanFord() {
     }
   }
 
+  // Проверка на отрицательные циклы
   for (const [node, edges] of adjacencyList.entries()) {
     for (const [neighbor, weight] of edges.entries()) {
       if (distances.get(node) + parseInt(weight) < distances.get(neighbor)) {
@@ -32,10 +35,29 @@ function BellmanFord() {
   }
 
   return (
-    <>
-      <table></table>
-    </>
+    <div className="text-white w-full flex flex-col items-start overflow-auto rounded shadow-md text-center ">
+      <table className="w-full border-collapse">
+        <thead>
+          <tr>
+            <th className="border border-white p-2">Node</th>
+            <th className="border border-white p-2">Distance</th>
+            <th className="border border-white p-2">Predecessor</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from(distances.entries()).map(([node, distance]) => (
+            <tr key={node}>
+              <td className="border border-white p-2">{node}</td>
+              <td className="border border-white p-2">{distance}</td>
+              <td className="border border-white p-2">
+                {predecessors.get(node)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
-}
+};
 
 export default BellmanFord;

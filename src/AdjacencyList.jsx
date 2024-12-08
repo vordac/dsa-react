@@ -1,3 +1,4 @@
+// AdjacencyList.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -93,8 +94,8 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList, setStartNode }) => {
   return (
     <div>
       {/* AdjacencyList Area */}
-      <p className="text-center font-bold text-lg mb-2">Adjacency List</p>
-      <div className="p-8 text-white w-full h-[240px] flex flex-col items-start overflow-auto border rounded shadow-md text-center">
+      <p className="text-center font-bold text-lg mb-4">Adjacency List</p>
+      <div className="text-white w-full flex flex-col items-start overflow-auto rounded text-center">
         <table className="w-full border-collapse">
           <thead>
             <tr>

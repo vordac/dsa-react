@@ -22,7 +22,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center p-4 h-screen w-screen">
       <div className="flex gap-x-4">
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex flex-col items-center justify-center text-center w-[256px] h-[300px] bg-red-500 text-lg rounded-md font-bold">
@@ -30,7 +30,10 @@ function App() {
             <p>Weighted</p>
             <p>Graph</p>
           </div>
-          <button className="font-bold" onClick={navigateGraph}>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded font-bold"
+            onClick={navigateGraph}
+          >
             Start
           </button>
         </div>
@@ -38,7 +41,10 @@ function App() {
           <div className="flex items-center justify-center text-center w-[256px] h-[300px] bg-blue-500 text-lg rounded-md font-bold">
             Binary Tree
           </div>
-          <button className="font-bold" onClick={navigateBinTree}>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded font-bold"
+            onClick={navigateBinTree}
+          >
             Start
           </button>
         </div>

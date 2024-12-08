@@ -33,11 +33,8 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList }) => {
       setAdjacencyList((prevList) => {
         const newList = new Map(prevList);
         const node1Edges = newList.get(node1) || new Map();
-        const node2Edges = newList.get(node2) || new Map();
         node1Edges.set(node2, weight);
-        node2Edges.set(node1, weight);
         newList.set(node1, node1Edges);
-        newList.set(node2, node2Edges);
         return newList;
       });
     } else {
@@ -68,9 +65,7 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList }) => {
       setAdjacencyList((prevList) => {
         const newList = new Map(prevList);
         const node1Edges = newList.get(node1);
-        const node2Edges = newList.get(node2);
         if (node1Edges) node1Edges.delete(node2);
-        if (node2Edges) node2Edges.delete(node1);
         return newList;
       });
     } else {
@@ -78,34 +73,18 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList }) => {
     }
   };
 
-  const getNeighbors = (node) => {
-    alert("getNeighbors");
-    return adjacencyList.get(node);
-  };
-
-  const hasEdge = (node1, node2) => {
-    alert("hasEdge");
-    const node1Edges = adjacencyList.get(node1);
-    return node1Edges ? node1Edges.has(node2) : false;
-  };
-
-  const navigateApp = () => {
-    navigate("/");
-  };
-
   const countEdges = (adjList) => {
     let edgeCount = 0;
     for (const [node, edges] of adjList) {
       edgeCount += edges.size;
     }
-    return edgeCount / 2; // Each edge is counted twice
+    return edgeCount; // Each edge is counted once
   };
 
   return (
     <div>
-      <p className="font-bold text-lg">Adjacency List</p>
       {/* AdjacencyList Area */}
-      <div className="bg-blue-500 p-8 m-8 text-white w-[512px] h-[440px] flex flex-col items-start overflow-auto">
+      <div className="p-8 text-white w-full h-[600px] flex flex-col items-start overflow-auto border rounded shadow-md text-center">
         <table className="w-full border-collapse">
           <thead>
             <tr>
@@ -139,14 +118,34 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList }) => {
         </table>
       </div>
       {/* Buttons Area */}
-      <div className="flex flex-col gap-4 items-center justify-center">
-        <div className="flex items-center justify-center gap-4">
-          <button onClick={addNode}>Add Node</button>
-          <button onClick={removeNode}>Remove Node</button>
+      <div className="flex flex-col gap-4 mt-4">
+        <div className="flex gap-4 flex-1">
+          <button
+            className="px-4 py-2 text-white rounded flex-1"
+            onClick={addNode}
+          >
+            Add Node
+          </button>
+          <button
+            className="px-4 py-2 text-white rounded flex-1"
+            onClick={removeNode}
+          >
+            Remove Node
+          </button>
         </div>
-        <div className="flex items-center justify-center gap-4">
-          <button onClick={addEdge}>Add Edge</button>
-          <button onClick={removeEdge}>Remove Edge</button>
+        <div className="flex items-center justify-center gap-4 flex-1">
+          <button
+            className="px-4 py-2 text-white rounded flex-1"
+            onClick={addEdge}
+          >
+            Add Edge
+          </button>
+          <button
+            className="px-4 py-2 text-white rounded flex-1"
+            onClick={removeEdge}
+          >
+            Remove Edge
+          </button>
         </div>
       </div>
     </div>

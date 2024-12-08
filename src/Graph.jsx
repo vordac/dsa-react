@@ -28,9 +28,6 @@ function Graph() {
 
   return (
     <div className="flex flex-col overflow-hidden">
-      {/* <header className="w-screen h-[40px] flex gap-x-4 items-center justify-center mt-4 ml-4">
-        
-      </header> */}
       <div className="flex">
         {/* Adjacency List Area*/}
         <div className="flex flex-col w-[600px] p-4">
@@ -48,7 +45,7 @@ function Graph() {
           {/* Modelling Area */}
           <ForceGraph2D
             graphData={graphData}
-            backgroundColor="lightgrey"
+            backgroundColor="white"
             width={1200}
             height={720}
             nodeLabel="id"
@@ -59,21 +56,38 @@ function Graph() {
             linkDirectionalArrowLength={4}
             linkDirectionalArrowRelPos={1}
             nodeAutoColorBy="group"
-            linkColor="red"
+            linkCanvasObject={(link, ctx, globalScale) => {
+              const { source, target, weight } = link;
+              const midX = (source.x + target.x) / 2;
+              const midY = (source.y + target.y) / 2;
+              const fontSize = 18 / globalScale;
+              ctx.font = `${fontSize}px Sans-Serif`;
+
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.fillStyle = "black";
+              ctx.fillText(weight, midX, midY);
+            }}
+            linkCanvasObjectMode={() => "after"}
             nodeCanvasObject={(node, ctx, globalScale) => {
               const label = node.id;
-              const fontSize = 20 / globalScale;
+              const fontSize = 16 / globalScale;
               ctx.font = `${fontSize}px Sans-Serif`;
               const textWidth = ctx.measureText(label).width;
               const bckgDimensions = [textWidth, fontSize].map(
                 (n) => n + fontSize * 0.2
               ); // some padding
 
-              ctx.fillRect(
-                node.x - bckgDimensions[0] / 2,
-                node.y - bckgDimensions[1] / 2,
-                ...bckgDimensions
-              );
+              // Set the background color
+              ctx.fillStyle = "rgba(255, 255, 255, 0.1)"; // Blue with some transparency
+
+              // Calculate the node's radius
+              const radius = Math.sqrt(node.val) * 4; // Adjust the multiplier as needed
+
+              // Draw the background rectangle to fully fill the node
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
+              ctx.fill();
 
               ctx.textAlign = "center";
               ctx.textBaseline = "middle";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const AdjacencyList = ({ adjacencyList, setAdjacencyList }) => {
+const AdjacencyList = ({ adjacencyList, setAdjacencyList, setStartNode }) => {
   const navigate = useNavigate();
 
   const addNode = () => {
@@ -81,6 +81,15 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList }) => {
     return edgeCount; // Each edge is counted once
   };
 
+  const selectStartNode = () => {
+    const node = prompt("Enter Start Node");
+    if (node && adjacencyList.has(node)) {
+      setStartNode(node);
+    } else {
+      alert("Invalid input or node does not exist.");
+    }
+  };
+
   return (
     <div>
       {/* AdjacencyList Area */}
@@ -146,6 +155,14 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList }) => {
             onClick={removeEdge}
           >
             Remove Edge
+          </button>
+        </div>
+        <div className="flex items-center justify-center gap-4 flex-1">
+          <button
+            className="px-4 py-2 text-white rounded flex-1"
+            onClick={selectStartNode}
+          >
+            Select Start Node
           </button>
         </div>
       </div>

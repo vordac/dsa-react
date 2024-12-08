@@ -2,11 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AdjacencyList from "./AdjacencyList";
 import ForceGraph2D from "react-force-graph-2d";
+import { bellmanFord } from "./bellmanFord";
 
 function Graph() {
   const navigate = useNavigate();
   const [adjacencyList, setAdjacencyList] = useState(new Map());
   const [graphData, setGraphData] = useState({ nodes: [], links: [] });
+  const [startNode, setStartNode] = useState(null);
+  const [shortestPaths, setShortestPaths] = useState(null);
 
   useEffect(() => {
     const nodes = [];
@@ -26,6 +29,17 @@ function Graph() {
     navigate("/");
   };
 
+  const runBellmanFord = () => {
+    if (!startNode) {
+      alert("Please select a start node.");
+      return;
+    }
+    const result = bellmanFord(adjacencyList, startNode);
+    if (result) {
+      setShortestPaths(result);
+    }
+  };
+
   return (
     <div className="flex flex-col overflow-hidden">
       <div className="flex">
@@ -36,6 +50,7 @@ function Graph() {
             <AdjacencyList
               adjacencyList={adjacencyList}
               setAdjacencyList={setAdjacencyList}
+              setStartNode={setStartNode} // Передайте функцию для выбора начальной вершины
             />
           </div>
         </div>
@@ -101,7 +116,12 @@ function Graph() {
 
           {/* Buttons Area */}
           <div className="flex gap-x-4 items-center justify-center mt-4">
-            <button className="px-4 py-2 text-white rounded">Start</button>
+            <button
+              className="px-4 py-2 text-white rounded"
+              onClick={runBellmanFord}
+            >
+              Start
+            </button>
             <button className="px-4 py-2 text-white rounded">Stop</button>
             <button className="px-4 py-2 text-white rounded">Back</button>
             <button
@@ -113,6 +133,22 @@ function Graph() {
           </div>
         </div>
       </div>
+
+      {/* Shortest Paths Result */}
+      {shortestPaths && (
+        <div className="p-4">
+          <h2>Shortest Paths from {startNode}</h2>
+          <ul>
+            {Array.from(shortestPaths.distances.entries()).map(
+              ([node, distance]) => (
+                <li key={node}>
+                  {node}: {distance}
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

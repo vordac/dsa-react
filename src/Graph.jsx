@@ -1,4 +1,3 @@
-// Graph.jsx
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AdjacencyList from "./AdjacencyList";
@@ -73,10 +72,10 @@ function Graph() {
           <ForceGraph2D
             graphData={graphData}
             backgroundColor="white"
-            width={1200}
-            height={720}
+            width={900}
+            height={480}
             nodeLabel="id"
-            nodeRelSize={6}
+            nodeRelSize={8}
             linkDirectionalParticles={2}
             linkDirectionalParticleSpeed={0.01}
             linkWidth={(link) => link.weight}

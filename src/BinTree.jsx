@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { hierarchy, tree } from "d3";
 import "./App.css";
 import BinarySearchTree from "./logic/BinarySearchTree";
 
 const BinTree = () => {
+  const navigate = useNavigate();
   const [inputData, setInputData] = useState("");
   const [outputStr, setOutputStr] = useState("");
   const [nodes, setNodes] = useState([4, 2, 1, 5, 8, 3]);
@@ -12,6 +14,10 @@ const BinTree = () => {
   useEffect(() => {
     setBst(new BinarySearchTree(nodes));
   }, [nodes]);
+
+  const navigateApp = () => {
+    navigate("/");
+  };
 
   const preOrderTraverse = () => {
     let str = "";
@@ -74,8 +80,12 @@ const BinTree = () => {
           transform={`translate(${data.x},${data.y})`}
         >
           <circle r="15" />
-          <text dy=".35em" style={{ textAnchor: "middle" }}>
-            {data.value}
+          <text
+            dy=".35em"
+            textAnchor="middle"
+            style={{ font: "12px sans-serif", fill: "white" }}
+          >
+            {data.data.value}
           </text>
         </g>
       ));
@@ -138,6 +148,9 @@ const BinTree = () => {
           </div>
         </div>
         <div className="appTree">{drawVerticalTree(nodes)}</div>
+        <button className="px-4 py-2 text-white rounded" onClick={navigateApp}>
+          Home
+        </button>
       </div>
       <div className="console">
         {outputStr}

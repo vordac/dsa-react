@@ -39,6 +39,11 @@ function Graph() {
     setShortestPaths(startNode);
   };
 
+  const onReset = () => {
+    setStartNode(null);
+    setShortestPaths(null);
+  };
+
   return (
     <div className="flex flex-col overflow-hidden-x">
       <div className="flex">
@@ -129,10 +134,9 @@ function Graph() {
             >
               Run
             </button>
-            <button className="px-4 py-2 text-white rounded">Pause</button>
-            <button className="px-4 py-2 text-white rounded">Back</button>
-            <button className="px-4 py-2 text-white rounded">Forward</button>
-            <button className="px-4 py-2 text-white rounded">Reset</button>
+            <button className="px-4 py-2 text-white rounded" onClick={onReset}>
+              Reset
+            </button>
             <button
               className="px-4 py-2 text-white rounded"
               onClick={navigateApp}

@@ -86,6 +86,7 @@ const AdjacencyList = ({ adjacencyList, setAdjacencyList, setStartNode }) => {
     const node = prompt("Enter Start Node");
     if (node && adjacencyList.has(node)) {
       setStartNode(node);
+      alert("Start Node: " + node);
     } else {
       alert("Invalid input or node does not exist.");
     }

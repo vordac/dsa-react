@@ -9,12 +9,13 @@ function BinarySearchTree(arrs) {
   if (arrs) this.insertNodes(arrs);
 }
 
-BinarySearchTree.prototype.insert = function (value) {
+BinarySearchTree.prototype.insert = function (value, queue) {
   var newNode = new Node(value);
   if (this.root === null) {
     this.root = newNode;
+    if (queue) queue.push(value);
   } else {
-    BinarySearchTree.insertNode(this.root, newNode);
+    BinarySearchTree.insertNode(this.root, newNode, queue);
   }
 };
 
@@ -132,18 +133,21 @@ BinarySearchTree.calcNodeCount = function (node) {
   );
 };
 
-BinarySearchTree.insertNode = function (node, newNode) {
+BinarySearchTree.insertNode = function (node, newNode, queue) {
+  if (queue) queue.push(node.value);
   if (node.value > newNode.value) {
     if (node.left === null) {
       node.left = newNode;
+      if (queue) queue.push(newNode.value);
     } else {
-      BinarySearchTree.insertNode(node.left, newNode);
+      BinarySearchTree.insertNode(node.left, newNode, queue);
     }
   } else {
     if (node.right === null) {
       node.right = newNode;
+      if (queue) queue.push(newNode.value);
     } else {
-      BinarySearchTree.insertNode(node.right, newNode);
+      BinarySearchTree.insertNode(node.right, newNode, queue);
     }
   }
 };
@@ -213,6 +217,35 @@ BinarySearchTree.removeNodeBySearch = function (node, value) {
   return node;
 };
 
+BinarySearchTree.prototype.findAndInsert = function (value, queue) {
+  var newNode = new Node(value);
+  if (this.root === null) {
+    this.root = newNode;
+    if (queue) queue.push(value);
+  } else {
+    BinarySearchTree.findAndInsertNode(this.root, newNode, queue);
+  }
+};
+
+BinarySearchTree.findAndInsertNode = function (node, newNode, queue) {
+  if (queue) queue.push(node.value);
+  if (node.value > newNode.value) {
+    if (node.left === null) {
+      node.left = newNode;
+      if (queue) queue.push(newNode.value);
+    } else {
+      BinarySearchTree.findAndInsertNode(node.left, newNode, queue);
+    }
+  } else {
+    if (node.right === null) {
+      node.right = newNode;
+      if (queue) queue.push(newNode.value);
+    } else {
+      BinarySearchTree.findAndInsertNode(node.right, newNode, queue);
+    }
+  }
+};
+
 BinarySearchTree.removeNode = function (node, value) {
   if (node === null) {
     return null;
@@ -236,6 +269,62 @@ BinarySearchTree.removeNode = function (node, value) {
       }
       node.value = minRightNode.value;
       node.right = BinarySearchTree.removeNode(node.right, minRightNode.value);
+      return node;
+    }
+  }
+};
+
+BinarySearchTree.prototype.findNode = function (value, queue) {
+  BinarySearchTree.findNodeRecursive(this.root, value, queue);
+};
+
+BinarySearchTree.findNodeRecursive = function (node, value, queue) {
+  if (node === null) {
+    return null;
+  }
+  queue.push(node.value);
+  if (node.value === value) {
+    return node;
+  } else if (node.value < value) {
+    return BinarySearchTree.findNodeRecursive(node.right, value, queue);
+  } else {
+    return BinarySearchTree.findNodeRecursive(node.left, value, queue);
+  }
+};
+
+BinarySearchTree.prototype.deleteNode = function (value, queue) {
+  this.root = BinarySearchTree.deleteNodeRecursive(this.root, value, queue);
+};
+
+BinarySearchTree.deleteNodeRecursive = function (node, value, queue) {
+  if (node === null) {
+    return null;
+  }
+  queue.push(node.value);
+  if (node.value < value) {
+    node.right = BinarySearchTree.deleteNodeRecursive(node.right, value, queue);
+    return node;
+  } else if (node.value > value) {
+    node.left = BinarySearchTree.deleteNodeRecursive(node.left, value, queue);
+    return node;
+  } else {
+    if (node.left === null && node.right === null) {
+      return null;
+    } else if (node.left === null) {
+      return node.right;
+    } else if (node.right === null) {
+      return node.left;
+    } else {
+      var minRightNode = node.right;
+      while (minRightNode !== null && minRightNode.left !== null) {
+        minRightNode = minRightNode.left;
+      }
+      node.value = minRightNode.value;
+      node.right = BinarySearchTree.deleteNodeRecursive(
+        node.right,
+        minRightNode.value,
+        queue
+      );
       return node;
     }
   }

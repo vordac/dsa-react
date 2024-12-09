@@ -3,8 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdjacencyList = ({ adjacencyList, setAdjacencyList, setStartNode }) => {
-  const navigate = useNavigate();
-
   const addNode = () => {
     if (adjacencyList.size >= 15) {
       alert("Maximum number of nodes (15) reached.");

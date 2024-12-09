@@ -102,15 +102,12 @@ function Graph() {
               const textWidth = ctx.measureText(label).width;
               const bckgDimensions = [textWidth, fontSize].map(
                 (n) => n + fontSize * 0.2
-              ); // some padding
+              );
 
-              // Set the background color
-              ctx.fillStyle = "rgba(255, 255, 255, 0.1)"; // Blue with some transparency
+              ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
 
-              // Calculate the node's radius
-              const radius = Math.sqrt(node.val) * 4; // Adjust the multiplier as needed
+              const radius = Math.sqrt(node.val) * 4;
 
-              // Draw the background rectangle to fully fill the node
               ctx.beginPath();
               ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
               ctx.fill();

@@ -1,18 +1,15 @@
-// BellmanFord.jsx
 import React from "react";
 
 const BellmanFord = ({ adjacencyList, startNode }) => {
   const distances = new Map();
   const predecessors = new Map();
 
-  // Инициализация расстояний
   for (const node of adjacencyList.keys()) {
     distances.set(node, Infinity);
     predecessors.set(node, null);
   }
   distances.set(startNode, 0);
 
-  // Релаксация ребер
   for (let i = 0; i < adjacencyList.size - 1; i++) {
     for (const [node, edges] of adjacencyList.entries()) {
       for (const [neighbor, weight] of edges.entries()) {
@@ -24,7 +21,6 @@ const BellmanFord = ({ adjacencyList, startNode }) => {
     }
   }
 
-  // Проверка на отрицательные циклы
   for (const [node, edges] of adjacencyList.entries()) {
     for (const [neighbor, weight] of edges.entries()) {
       if (distances.get(node) + parseInt(weight) < distances.get(neighbor)) {

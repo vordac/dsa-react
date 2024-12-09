@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { hierarchy, tree } from "d3";
-import "./App.css";
 import BinarySearchTree from "./logic/BinarySearchTree";
 
 const BinTree = () => {
@@ -127,41 +126,59 @@ const BinTree = () => {
   };
 
   return (
-    <div className="BinTree">
-      <div className="container">
-        <div className="toolbar">
-          <div className="toolbarLine">
-            <input
-              className="appInput"
-              type="text"
-              placeholder="Separate numbers with"
-              value={inputData}
-              onChange={(evt) => changeInputData(evt.target.value)}
-            />
-            <button onClick={submitInputData}>Insert Node</button>
-            <button onClick={clearBst}>Clear data</button>
-          </div>
-          <div className="toolbarLine">
-            <button onClick={preOrderTraverse}>Pre-order traversal</button>
-            <button onClick={inOrderTraverse}>In-order traversal</button>
-            <button onClick={postOrderTraverse}>Post-order traversal</button>
-          </div>
-        </div>
-        <div className="appTree">{drawVerticalTree(nodes)}</div>
-        <button className="px-4 py-2 text-white rounded" onClick={navigateApp}>
-          Home
-        </button>
-      </div>
-      <div className="console">
-        {outputStr}
-        {outputStr && (
-          <span
-            style={{ paddingLeft: "10px", cursor: "pointer" }}
+    <div className="flex flex-col overflow-hidden-x">
+      <div className="flex">
+        {/* Toolbar Area */}
+        <div className="flex flex-col w-[600px] p-4 gap-y-4">
+          <input
+            className="p-4 rounded"
+            type="text"
+            placeholder="Separate numbers with commas"
+            value={inputData}
+            onChange={(evt) => changeInputData(evt.target.value)}
+          />
+          <button className="text-white rounded" onClick={submitInputData}>
+            Insert Node
+          </button>
+          <button className="text-white rounded" onClick={clearBst}>
+            Clear Tree
+          </button>
+          <button
+            className="pl-2 cursor-pointer rounded"
             onClick={() => setOutputStr("")}
           >
-            Clear data
-          </span>
-        )}
+            Clear Output
+          </button>
+          <button className="px-4 text-white rounded " onClick={navigateApp}>
+            Home
+          </button>
+          <p className="mt-8 font-bold text-lg">Output: {outputStr}</p>
+        </div>
+
+        {/* Tree Area */}
+        <div className="flex flex-col py-4 px-8">
+          <div className="appTree">{drawVerticalTree(nodes)}</div>
+          <div className="flex items-center justify-center gap-x-4 my-8">
+            <button
+              className="px-4 py-2 text-white rounded"
+              onClick={preOrderTraverse}
+            >
+              Pre-order traversal
+            </button>
+            <button
+              className="px-4 py-2 text-white rounded"
+              onClick={inOrderTraverse}
+            >
+              In-order traversal
+            </button>
+            <button
+              className="px-4 py-2 text-white rounded"
+              onClick={postOrderTraverse}
+            >
+              Post-order traversal
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

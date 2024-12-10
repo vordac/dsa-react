@@ -1,20 +1,18 @@
 export const calculateBellmanFord = (adjacencyList, startNode) => {
   const distances = new Map();
   const predecessors = new Map();
-  const iterationDistances = []; // To store distances at each iteration
-  const relaxedEdges = []; // To store relaxed edges at each iteration
+  const iterationDistances = [];
+  const relaxedEdges = [];
 
-  // Initialize distances and predecessors
   for (const node of adjacencyList.keys()) {
     distances.set(node, Infinity);
     predecessors.set(node, null);
   }
   distances.set(startNode, 0);
 
-  // Relax all edges |V| - 1 times
   for (let i = 0; i < adjacencyList.size - 1; i++) {
-    const currentDistances = new Map(distances); // Store distances at this iteration
-    const currentRelaxedEdges = new Set(); // Store relaxed edges at this iteration
+    const currentDistances = new Map(distances);
+    const currentRelaxedEdges = new Set();
     iterationDistances.push(currentDistances);
 
     for (const [node, edges] of adjacencyList.entries()) {
@@ -29,7 +27,6 @@ export const calculateBellmanFord = (adjacencyList, startNode) => {
     relaxedEdges.push(currentRelaxedEdges);
   }
 
-  // Check for negative weight cycles
   for (const [node, edges] of adjacencyList.entries()) {
     for (const [neighbor, weight] of edges.entries()) {
       if (distances.get(node) + parseInt(weight) < distances.get(neighbor)) {

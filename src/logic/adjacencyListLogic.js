@@ -1,4 +1,3 @@
-// AdjacencyList.js
 export const addNode = (adjacencyList, setAdjacencyList) => {
   if (adjacencyList.size >= 15) {
     alert("Maximum number of nodes (15) reached.");
@@ -21,7 +20,6 @@ export const addEdge = (adjacencyList, setAdjacencyList) => {
   const node2 = prompt("Enter Node 2");
   const weight = prompt("Enter Weight");
 
-  // Validate that weight is a number
   const weightPattern = /^\d+$/;
   if (!weightPattern.test(weight)) {
     alert("Weight must be a number.");
@@ -88,7 +86,7 @@ export const countEdges = (adjList) => {
   for (const [node, edges] of adjList) {
     edgeCount += edges.size;
   }
-  return edgeCount; // Each edge is counted once
+  return edgeCount;
 };
 
 export const selectStartNode = (adjacencyList, setStartNode) => {

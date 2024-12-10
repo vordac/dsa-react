@@ -26,26 +26,27 @@ function App() {
       <div className="flex gap-x-4">
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex flex-col items-center justify-center text-center w-[256px] h-[300px] bg-red-500 text-lg rounded-md font-bold">
-            <p>Directed</p>
-            <p>Weighted</p>
-            <p>Graph</p>
+            <p>Орієнтований</p>
+            <p>Зважений</p>
+            <p>Граф</p>
           </div>
           <button
             className="px-4 py-2 text-white rounded font-bold"
             onClick={navigateGraph}
           >
-            Start
+            Почати
           </button>
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
-          <div className="flex items-center justify-center text-center w-[256px] h-[300px] bg-blue-500 text-lg rounded-md font-bold">
-            Binary Tree
+          <div className="flex flex-col items-center justify-center text-center w-[256px] h-[300px] bg-blue-500 text-lg rounded-md font-bold">
+            <p>Бінарне</p>
+            <p>Дерево</p>
           </div>
           <button
             className="px-4 py-2 text-white rounded font-bold"
             onClick={navigateBinTree}
           >
-            Start
+            Почати
           </button>
         </div>
       </div>

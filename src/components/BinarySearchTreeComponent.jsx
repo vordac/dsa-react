@@ -23,7 +23,7 @@ const BinarySearchTreeComponent = () => {
       intervalRef.current = setInterval(() => {
         setCurrentStep((prevStep) => {
           if (prevStep < animationQueue.length - 1) {
-            console.log("Current Step:", prevStep + 1); // Debugging statement
+            console.log("Current Step:", prevStep + 1);
             return prevStep + 1;
           } else {
             clearInterval(intervalRef.current);
@@ -112,7 +112,7 @@ const BinarySearchTreeComponent = () => {
 
         console.log(
           `Node Value: ${data.data.value}, Highlighted: ${isHighlighted}`
-        ); // Debugging statement
+        );
 
         return (
           <g
@@ -148,9 +148,9 @@ const BinarySearchTreeComponent = () => {
 
   const submitInputData = () => {
     setOutputStr("");
-    const inputData = prompt("Enter a number to insert into the tree:");
+    const inputData = prompt("Введіть число для вставки в дерево:");
     if (!inputData || isNaN(inputData)) {
-      alert("Please enter a valid number");
+      alert("Будь ласка, введіть дійсне число");
       return;
     }
     const nodeValue = parseInt(inputData, 10);
@@ -167,9 +167,9 @@ const BinarySearchTreeComponent = () => {
 
   const findNode = () => {
     setOutputStr("");
-    const inputData = prompt("Enter a number to find in the tree:");
+    const inputData = prompt("Введіть число для пошуку в дереві:");
     if (!inputData || isNaN(inputData)) {
-      alert("Please enter a valid number");
+      alert("Будь ласка, введіть дійсне число");
       return;
     }
     const nodeValue = parseInt(inputData, 10);
@@ -185,9 +185,9 @@ const BinarySearchTreeComponent = () => {
 
   const deleteNode = () => {
     setOutputStr("");
-    const inputData = prompt("Enter a number to delete from the tree:");
+    const inputData = prompt("Введіть число для видалення з дерева:");
     if (!inputData || isNaN(inputData)) {
-      alert("Please enter a valid number");
+      alert("Будь ласка, введіть дійсне число");
       return;
     }
     const nodeValue = parseInt(inputData, 10);
@@ -241,26 +241,25 @@ const BinarySearchTreeComponent = () => {
   return (
     <div className="flex flex-col overflow-hidden-x">
       <div className="flex">
-        {/* Toolbar Area */}
         <div className="flex flex-col w-[600px] p-4 gap-y-4">
           <button className="text-white rounded" onClick={submitInputData}>
-            Insert Node
+            Вставити вузол
           </button>
           <button className="text-white rounded" onClick={findNode}>
-            Find Node
+            Знайти вузол
           </button>
           <button className="text-white rounded" onClick={deleteNode}>
-            Delete Node
+            Видалити вузол
           </button>
           <button className="text-white rounded" onClick={clearBst}>
-            Clear Tree
+            Очистити дерево
           </button>
           <button className="px-4 text-white rounded " onClick={navigateApp}>
-            Home
+            Додому
           </button>
-          <p className="mt-8 font-bold text-lg">Output: {outputStr}</p>
+          <p className="mt-8 font-bold text-lg">Вивід: {outputStr}</p>
           <div className="flex flex-col gap-y-4">
-            <div>Animation Delay: {speed}ms</div>
+            <div>Затримка анімації: {speed}мс</div>
             <label>
               <input
                 className="slider"
@@ -274,7 +273,6 @@ const BinarySearchTreeComponent = () => {
           </div>
         </div>
 
-        {/* Tree Area */}
         <div className="flex flex-col py-4 px-8 gap-y-4">
           <div className="appTree">{drawVerticalTree(nodes)}</div>
           <div className="flex items-center justify-center gap-x-4 mt-8">
@@ -282,19 +280,19 @@ const BinarySearchTreeComponent = () => {
               className="px-4 py-2 text-white rounded"
               onClick={preOrderTraverse}
             >
-              Pre-order traversal
+              Префіксний обхід
             </button>
             <button
               className="px-4 py-2 text-white rounded"
               onClick={inOrderTraverse}
             >
-              In-order traversal
+              Інфіксний обхід
             </button>
             <button
               className="px-4 py-2 text-white rounded"
               onClick={postOrderTraverse}
             >
-              Post-order traversal
+              Постфіксний обхід
             </button>
           </div>
           <div className="flex items-center justify-center gap-x-4 ">
@@ -302,25 +300,25 @@ const BinarySearchTreeComponent = () => {
               className="px-4 py-2 text-white rounded"
               onClick={resumeAnimation}
             >
-              Resume
+              Продовжити
             </button>
             <button
               className="px-4 py-2 text-white rounded"
               onClick={pauseAnimation}
             >
-              Pause
+              Пауза
             </button>
             <button className="px-4 py-2 text-white rounded" onClick={goBack}>
-              Go Back
+              Назад
             </button>
             <button
               className="px-4 py-2 text-white rounded"
               onClick={goForward}
             >
-              Go Forward
+              Вперед
             </button>
             <button className="px-4 py-2 text-white rounded" onClick={reset}>
-              Reset
+              Скинути
             </button>
           </div>
         </div>

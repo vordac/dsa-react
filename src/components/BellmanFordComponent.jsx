@@ -7,7 +7,7 @@ const BellmanFordComponent = ({
   iterationDistances,
 }) => {
   if (!distances) {
-    return <div>Graph contains a negative weight cycle</div>;
+    return <div>Граф містить цикл з від'ємною вагою</div>;
   }
 
   const currentDistances = iterationDistances[currentStep] || distances;
@@ -17,7 +17,7 @@ const BellmanFordComponent = ({
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            <th className="border border-white p-2">Node</th>
+            <th className="border border-white p-2">Вузол</th>
             {Array.from(currentDistances.keys()).map((node) => (
               <th key={node} className="border border-white p-2">
                 {node}
@@ -32,7 +32,7 @@ const BellmanFordComponent = ({
               {Array.from(currentDistances.keys()).map((otherNode) => (
                 <td key={otherNode} className="border border-white p-2">
                   {currentDistances.get(otherNode) === Infinity
-                    ? "Inf"
+                    ? "inf"
                     : currentDistances.get(otherNode)}
                 </td>
               ))}

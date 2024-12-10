@@ -24,7 +24,7 @@ function DirectedWeightedGraphComponent() {
     const links = [];
 
     adjacencyList.forEach((edges, node) => {
-      nodes.push({ id: node, x: Math.random() * 900, y: Math.random() * 480 }); // Random positions for nodes
+      nodes.push({ id: node, x: Math.random() * 900, y: Math.random() * 480 });
       edges.forEach((weight, neighbor) => {
         links.push({ source: node, target: neighbor, weight });
       });
@@ -51,7 +51,7 @@ function DirectedWeightedGraphComponent() {
 
   const runBellmanFord = () => {
     if (!startNode) {
-      alert("Please select a start node.");
+      alert("Будь ласка, виберіть стартовий вузол.");
       return;
     }
 
@@ -61,10 +61,8 @@ function DirectedWeightedGraphComponent() {
       setPredecessors(result.predecessors);
       setIterationDistances(result.iterationDistances);
 
-      // Generate animation queue
       const queue = [];
 
-      // Relax edges |V| - 1 times
       for (let i = 0; i < adjacencyList.size - 1; i++) {
         for (const [node, edges] of adjacencyList.entries()) {
           for (const [neighbor, weight] of edges.entries()) {
@@ -125,9 +123,7 @@ function DirectedWeightedGraphComponent() {
   return (
     <div className="flex flex-col overflow-hidden-x">
       <div className="flex">
-        {/* Adjacency List Area*/}
         <div className="flex flex-col w-[600px] p-4">
-          {/* Adjacency List */}
           <div className="flex flex-col">
             <AdjacencyListComponent
               adjacencyList={adjacencyList}
@@ -137,9 +133,7 @@ function DirectedWeightedGraphComponent() {
           </div>
         </div>
 
-        {/* Graph Area */}
         <div className="flex flex-col py-4 px-8">
-          {/* Modelling Area */}
           <CanvasComponent
             graphData={graphData}
             setGraphData={setGraphData}
@@ -148,26 +142,25 @@ function DirectedWeightedGraphComponent() {
             isPlaying={isPlaying}
           />
 
-          {/* Buttons Area */}
           <div className="flex flex-col gap-y-4 items-center justify-center mt-4">
             <div className="flex gap-x-4">
               <button
                 className="px-4 py-2 text-white rounded"
                 onClick={runBellmanFord}
               >
-                Run
+                Запустити
               </button>
               <button
                 className="px-4 py-2 text-white rounded"
                 onClick={onReset}
               >
-                Reset
+                Скинути
               </button>
               <button
                 className="px-4 py-2 text-white rounded"
                 onClick={navigateApp}
               >
-                Home
+                Додому
               </button>
             </div>
             <div className="flex gap-x-4">
@@ -175,32 +168,32 @@ function DirectedWeightedGraphComponent() {
                 className="px-4 py-2 text-white rounded"
                 onClick={resumeAnimation}
               >
-                Resume
+                Продовжити
               </button>
               <button
                 className="px-4 py-2 text-white rounded"
                 onClick={pauseAnimation}
               >
-                Pause
+                Пауза
               </button>
               <button className="px-4 py-2 text-white rounded" onClick={goBack}>
-                Go Back
+                Назад
               </button>
               <button
                 className="px-4 py-2 text-white rounded"
                 onClick={goForward}
               >
-                Go Forward
+                Вперед
               </button>
               <button
                 className="px-4 py-2 text-white rounded"
                 onClick={resetAnimation}
               >
-                Reset
+                Скинути
               </button>
             </div>
             <div className="flex flex-col gap-y-4">
-              <div>Animation Delay: {speed}ms</div>
+              <div>Затримка анімації: {speed}мс</div>
               <label>
                 <input
                   className="slider"
@@ -216,7 +209,7 @@ function DirectedWeightedGraphComponent() {
         </div>
       </div>
       <div className="p-8">
-        <p className="text-center font-bold text-lg m-4">Bellman-Ford</p>
+        <p className="text-center font-bold text-lg m-4">Беллман-Форд</p>
 
         <BellmanFordComponent
           distances={distances}

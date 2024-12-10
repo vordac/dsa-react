@@ -38,6 +38,8 @@ function DirectedWeightedGraphComponent() {
   };
 
   const onReset = () => {
+    setAdjacencyList(new Map());
+    setGraphData({ nodes: [], links: [] });
     setStartNode(null);
     setShortestPaths(null);
   };

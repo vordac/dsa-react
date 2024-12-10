@@ -22,7 +22,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 h-screen w-screen">
+    <div className="flex flex-col items-center justify-center p-4 h-screen w-screen ">
       <div className="flex gap-x-4">
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex flex-col items-center justify-center text-center w-[256px] h-[300px] bg-red-500 text-lg rounded-md font-bold">

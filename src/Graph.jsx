@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AdjacencyList from "./AdjacencyList";
-import ForceGraph2D from "react-force-graph-2d";
 import BellmanFord from "./BellmanFord";
+import GraphCanvas from "./GraphCanvas"; // Import the custom canvas component
 
 function Graph() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function Graph() {
     const links = [];
 
     adjacencyList.forEach((edges, node) => {
-      nodes.push({ id: node });
+      nodes.push({ id: node, x: Math.random() * 900, y: Math.random() * 480 }); // Random positions for nodes
       edges.forEach((weight, neighbor) => {
         links.push({ source: node, target: neighbor, weight });
       });
@@ -34,7 +34,6 @@ function Graph() {
       alert("Please select a start node.");
       return;
     }
-    // Установите startNode для компонента BellmanFord
     setShortestPaths(startNode);
   };
 
@@ -53,7 +52,7 @@ function Graph() {
             <AdjacencyList
               adjacencyList={adjacencyList}
               setAdjacencyList={setAdjacencyList}
-              setStartNode={setStartNode} // Передайте функцию для выбора начальной вершины
+              setStartNode={setStartNode}
             />
             <p className="text-center font-bold text-lg m-4">Bellman-Ford</p>
 
@@ -69,58 +68,7 @@ function Graph() {
         {/* Graph Area */}
         <div className="flex flex-col py-4 px-8">
           {/* Modelling Area */}
-          <ForceGraph2D
-            graphData={graphData}
-            backgroundColor="white"
-            width={900}
-            height={480}
-            nodeLabel="id"
-            nodeRelSize={8}
-            linkDirectionalParticles={2}
-            linkDirectionalParticleSpeed={0.01}
-            linkWidth={(link) => link.weight}
-            linkDirectionalArrowLength={6}
-            linkDirectionalArrowRelPos={1}
-            nodeAutoColorBy="group"
-            linkCanvasObject={(link, ctx, globalScale) => {
-              const { source, target, weight } = link;
-              const midX = (source.x + target.x) / 2;
-              const midY = (source.y + target.y) / 2;
-              const fontSize = 18 / globalScale;
-              ctx.font = `${fontSize}px Sans-Serif`;
-
-              ctx.textAlign = "center";
-              ctx.textBaseline = "middle";
-              ctx.fillStyle = "black";
-              ctx.fillText(weight, midX, midY);
-            }}
-            linkCanvasObjectMode={() => "after"}
-            nodeCanvasObject={(node, ctx, globalScale) => {
-              const label = node.id;
-              const fontSize = 16 / globalScale;
-              ctx.font = `${fontSize}px Sans-Serif`;
-              const textWidth = ctx.measureText(label).width;
-              const bckgDimensions = [textWidth, fontSize].map(
-                (n) => n + fontSize * 0.2
-              );
-
-              ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-
-              const radius = Math.sqrt(node.val) * 4;
-
-              ctx.beginPath();
-              ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
-              ctx.fill();
-
-              ctx.textAlign = "center";
-              ctx.textBaseline = "middle";
-              ctx.fillStyle = "black";
-              ctx.fillText(label, node.x, node.y);
-
-              node.__bckgDimensions = bckgDimensions;
-            }}
-            nodeCanvasObjectMode={() => "after"}
-          />
+          <GraphCanvas graphData={graphData} setGraphData={setGraphData} />
 
           {/* Buttons Area */}
           <div className="flex gap-x-4 items-center justify-center mt-4">

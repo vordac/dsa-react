@@ -31,14 +31,37 @@ const CanvasComponent = ({ graphData, setGraphData }) => {
           ctx.beginPath();
           ctx.moveTo(sourceNode.x, sourceNode.y);
           ctx.lineTo(targetNode.x, targetNode.y);
-          ctx.strokeStyle = "#ccc";
+          ctx.strokeStyle = "black";
           ctx.lineWidth = 2;
           ctx.stroke();
+
+          // Draw arrowhead
+          const angle = Math.atan2(
+            targetNode.y - sourceNode.y,
+            targetNode.x - sourceNode.x
+          );
+          const arrowSize = 10;
+          const arrowOffset = 15; // Offset to avoid overlapping with the node
+          ctx.fillStyle = "black";
+          const arrowX = targetNode.x - arrowOffset * Math.cos(angle);
+          const arrowY = targetNode.y - arrowOffset * Math.sin(angle);
+
+          ctx.save();
+          ctx.translate(arrowX, arrowY);
+          ctx.rotate(angle);
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(-arrowSize, -arrowSize / 2);
+          ctx.lineTo(-arrowSize, arrowSize / 2);
+          ctx.closePath();
+          ctx.fillStyle = "black";
+          ctx.fill();
+          ctx.restore();
 
           // Draw weight label
           const midX = (sourceNode.x + targetNode.x) / 2;
           const midY = (sourceNode.y + targetNode.y) / 2;
-          ctx.fillStyle = "red";
+          ctx.fillStyle = "yellow";
           ctx.font = "bold 16px sans-serif"; // Make the font bold
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
@@ -171,14 +194,36 @@ const CanvasComponent = ({ graphData, setGraphData }) => {
           ctx.beginPath();
           ctx.moveTo(sourceNode.x, sourceNode.y);
           ctx.lineTo(targetNode.x, targetNode.y);
-          ctx.strokeStyle = "#ccc";
+          ctx.fillStyle = "black";
           ctx.lineWidth = 2;
           ctx.stroke();
+
+          // Draw arrowhead
+          const angle = Math.atan2(
+            targetNode.y - sourceNode.y,
+            targetNode.x - sourceNode.x
+          );
+          const arrowSize = 10;
+          const arrowOffset = 15; // Offset to avoid overlapping with the node
+          const arrowX = targetNode.x - arrowOffset * Math.cos(angle);
+          const arrowY = targetNode.y - arrowOffset * Math.sin(angle);
+
+          ctx.save();
+          ctx.translate(arrowX, arrowY);
+          ctx.rotate(angle);
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(-arrowSize, -arrowSize / 2);
+          ctx.lineTo(-arrowSize, arrowSize / 2);
+          ctx.closePath();
+          ctx.fillStyle = "black";
+          ctx.fill();
+          ctx.restore();
 
           // Draw weight label
           const midX = (sourceNode.x + targetNode.x) / 2;
           const midY = (sourceNode.y + targetNode.y) / 2;
-          ctx.fillStyle = "red";
+          ctx.fillStyle = "yellow";
           ctx.font = "bold 16px sans-serif"; // Make the font bold
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";

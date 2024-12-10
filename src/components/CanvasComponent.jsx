@@ -275,8 +275,8 @@ const CanvasComponent = ({
   return (
     <canvas
       ref={canvasRef}
-      width={1000}
-      height={360}
+      width={900}
+      height={480}
       style={{ border: "1px solid white", borderRadius: "4px" }}
     />
   );

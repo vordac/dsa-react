@@ -54,13 +54,16 @@ function DirectedWeightedGraphComponent() {
       alert("Please select a start node.");
       return;
     }
+
     const result = calculateBellmanFord(adjacencyList, startNode);
     if (result) {
       setDistances(result.distances);
       setPredecessors(result.predecessors);
       setIterationDistances(result.iterationDistances);
+
       // Generate animation queue
       const queue = [];
+
       // Relax edges |V| - 1 times
       for (let i = 0; i < adjacencyList.size - 1; i++) {
         for (const [node, edges] of adjacencyList.entries()) {
@@ -71,6 +74,7 @@ function DirectedWeightedGraphComponent() {
           }
         }
       }
+
       setAnimationQueue(queue);
       setCurrentStep(0);
       setIsPlaying(true);
@@ -157,7 +161,7 @@ function DirectedWeightedGraphComponent() {
                 className="px-4 py-2 text-white rounded"
                 onClick={onReset}
               >
-                Reset All
+                Reset
               </button>
               <button
                 className="px-4 py-2 text-white rounded"
@@ -192,7 +196,7 @@ function DirectedWeightedGraphComponent() {
                 className="px-4 py-2 text-white rounded"
                 onClick={resetAnimation}
               >
-                Reset Animation
+                Reset
               </button>
             </div>
             <div className="flex flex-col gap-y-4">

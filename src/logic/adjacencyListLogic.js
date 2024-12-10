@@ -21,6 +21,13 @@ export const addEdge = (adjacencyList, setAdjacencyList) => {
   const node2 = prompt("Enter Node 2");
   const weight = prompt("Enter Weight");
 
+  // Validate that weight is a number
+  const weightPattern = /^\d+$/;
+  if (!weightPattern.test(weight)) {
+    alert("Weight must be a number.");
+    return;
+  }
+
   if (node1 && node2 && weight && node1 !== node2) {
     if (!adjacencyList.has(node1) || !adjacencyList.has(node2)) {
       alert("Node or nodes are not in the list.");

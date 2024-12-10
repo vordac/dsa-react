@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import AdjacencyList from "./AdjacencyList";
-import BellmanFord from "./BellmanFord";
-import GraphCanvas from "./GraphCanvas"; // Import the custom canvas component
+import AdjacencyListComponent from "./AdjacencyListComponent";
+import BellmanFordComponent from "./BellmanFordComponent";
+import CanvasComponent from "./CanvasComponent";
 
-function Graph() {
+function DirectedWeightedGraphComponent() {
   const navigate = useNavigate();
   const [adjacencyList, setAdjacencyList] = useState(new Map());
   const [graphData, setGraphData] = useState({ nodes: [], links: [] });
@@ -49,7 +49,7 @@ function Graph() {
         <div className="flex flex-col w-[600px] p-4">
           {/* Adjacency List */}
           <div className="flex flex-col">
-            <AdjacencyList
+            <AdjacencyListComponent
               adjacencyList={adjacencyList}
               setAdjacencyList={setAdjacencyList}
               setStartNode={setStartNode}
@@ -57,7 +57,7 @@ function Graph() {
             <p className="text-center font-bold text-lg m-4">Bellman-Ford</p>
 
             {shortestPaths && (
-              <BellmanFord
+              <BellmanFordComponent
                 adjacencyList={adjacencyList}
                 startNode={startNode}
               />
@@ -68,7 +68,7 @@ function Graph() {
         {/* Graph Area */}
         <div className="flex flex-col py-4 px-8">
           {/* Modelling Area */}
-          <GraphCanvas graphData={graphData} setGraphData={setGraphData} />
+          <CanvasComponent graphData={graphData} setGraphData={setGraphData} />
 
           {/* Buttons Area */}
           <div className="flex gap-x-4 items-center justify-center mt-4">
@@ -94,4 +94,4 @@ function Graph() {
   );
 }
 
-export default Graph;
+export default DirectedWeightedGraphComponent;

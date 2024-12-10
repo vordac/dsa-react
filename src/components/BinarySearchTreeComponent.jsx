@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { hierarchy, tree } from "d3";
-import BinarySearchTree from "./logic/BinarySearchTree";
+import BinarySearchTree from "../logic/binarySearchTreeLogic";
 
-const BinTree = () => {
+const BinarySearchTreeComponent = () => {
   const navigate = useNavigate();
   const [outputStr, setOutputStr] = useState("");
   const [nodes, setNodes] = useState([4, 2, 1, 5, 8, 3]);
@@ -329,4 +329,4 @@ const BinTree = () => {
   );
 };
 
-export default BinTree;
+export default BinarySearchTreeComponent;

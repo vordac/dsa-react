@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 
-const GraphCanvas = ({ graphData, setGraphData }) => {
+const CanvasComponent = ({ graphData, setGraphData }) => {
   const canvasRef = useRef(null);
   const [draggingNode, setDraggingNode] = useState(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -218,4 +218,4 @@ const GraphCanvas = ({ graphData, setGraphData }) => {
   );
 };
 
-export default GraphCanvas;
+export default CanvasComponent;

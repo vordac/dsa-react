@@ -5,8 +5,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 import "./App.css";
-import Graph from "./Graph";
-import BinTree from "./BinTree";
+import DirectedWeightedGraphComponent from "./components/DirectedWeightedGraphComponent";
+import BinarySearchTreeComponent from "./components/BinarySearchTreeComponent";
 
 function App() {
   let navigate = useNavigate();
@@ -17,7 +17,7 @@ function App() {
   };
 
   const navigateBinTree = () => {
-    let path = `/bintree`;
+    let path = `/binaryTree`;
     navigate(path);
   };
 
@@ -58,8 +58,8 @@ function Main() {
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/graph" element={<Graph />} />
-        <Route path="/bintree" element={<BinTree />} />
+        <Route path="/graph" element={<DirectedWeightedGraphComponent />} />
+        <Route path="/binaryTree" element={<BinarySearchTreeComponent />} />
       </Routes>
     </Router>
   );

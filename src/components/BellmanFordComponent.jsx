@@ -1,5 +1,3 @@
-import React from "react";
-
 const BellmanFordComponent = ({
   distances,
   predecessors,
@@ -18,20 +16,24 @@ const BellmanFordComponent = ({
         <thead>
           <tr>
             <th className="border border-white p-2">Node</th>
-            <th className="border border-white p-2">Distance</th>
-            <th className="border border-white p-2">Predecessor</th>
+            {Array.from(currentDistances.keys()).map((node) => (
+              <th key={node} className="border border-white p-2">
+                {node}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
           {Array.from(currentDistances.entries()).map(([node, distance]) => (
             <tr key={node}>
               <td className="border border-white p-2">{node}</td>
-              <td className="border border-white p-2">
-                {distance === Infinity ? "Inf" : distance}
-              </td>
-              <td className="border border-white p-2">
-                {predecessors.get(node) || "—"}
-              </td>
+              {Array.from(currentDistances.keys()).map((otherNode) => (
+                <td key={otherNode} className="border border-white p-2">
+                  {currentDistances.get(otherNode) === Infinity
+                    ? "Inf"
+                    : currentDistances.get(otherNode)}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>

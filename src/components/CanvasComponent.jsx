@@ -79,7 +79,8 @@ const CanvasComponent = ({
       nodes.forEach((node) => {
         const isHighlighted =
           currentStep < animationQueue.length &&
-          node.id === animationQueue[currentStep][0];
+          (node.id === animationQueue[currentStep][0] ||
+            node.id === animationQueue[currentStep][1]);
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, 15, 0, 2 * Math.PI);
@@ -248,7 +249,8 @@ const CanvasComponent = ({
       nodes.forEach((node) => {
         const isHighlighted =
           currentStep < animationQueue.length &&
-          node.id === animationQueue[currentStep][0];
+          (node.id === animationQueue[currentStep][0] ||
+            node.id === animationQueue[currentStep][1]);
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, 15, 0, 2 * Math.PI);
@@ -273,8 +275,8 @@ const CanvasComponent = ({
   return (
     <canvas
       ref={canvasRef}
-      width={900}
-      height={480}
+      width={1000}
+      height={360}
       style={{ border: "1px solid white", borderRadius: "4px" }}
     />
   );

@@ -54,16 +54,13 @@ function DirectedWeightedGraphComponent() {
       alert("Please select a start node.");
       return;
     }
-
     const result = calculateBellmanFord(adjacencyList, startNode);
     if (result) {
       setDistances(result.distances);
       setPredecessors(result.predecessors);
       setIterationDistances(result.iterationDistances);
-
       // Generate animation queue
       const queue = [];
-
       // Relax edges |V| - 1 times
       for (let i = 0; i < adjacencyList.size - 1; i++) {
         for (const [node, edges] of adjacencyList.entries()) {
@@ -74,7 +71,6 @@ function DirectedWeightedGraphComponent() {
           }
         }
       }
-
       setAnimationQueue(queue);
       setCurrentStep(0);
       setIsPlaying(true);
@@ -134,14 +130,6 @@ function DirectedWeightedGraphComponent() {
               setAdjacencyList={setAdjacencyList}
               setStartNode={setStartNode}
             />
-            <p className="text-center font-bold text-lg m-4">Bellman-Ford</p>
-
-            <BellmanFordComponent
-              distances={distances}
-              predecessors={predecessors}
-              currentStep={currentStep}
-              iterationDistances={iterationDistances}
-            />
           </div>
         </div>
 
@@ -169,7 +157,7 @@ function DirectedWeightedGraphComponent() {
                 className="px-4 py-2 text-white rounded"
                 onClick={onReset}
               >
-                Reset
+                Reset All
               </button>
               <button
                 className="px-4 py-2 text-white rounded"
@@ -204,7 +192,7 @@ function DirectedWeightedGraphComponent() {
                 className="px-4 py-2 text-white rounded"
                 onClick={resetAnimation}
               >
-                Reset
+                Reset Animation
               </button>
             </div>
             <div className="flex flex-col gap-y-4">
@@ -222,6 +210,16 @@ function DirectedWeightedGraphComponent() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="p-8">
+        <p className="text-center font-bold text-lg m-4">Bellman-Ford</p>
+
+        <BellmanFordComponent
+          distances={distances}
+          predecessors={predecessors}
+          currentStep={currentStep}
+          iterationDistances={iterationDistances}
+        />
       </div>
     </div>
   );

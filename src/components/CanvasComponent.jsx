@@ -52,7 +52,7 @@ const CanvasComponent = ({ graphData, setGraphData }) => {
         ctx.arc(node.x, node.y, 15, 0, 2 * Math.PI);
         ctx.fillStyle = "black";
         ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 2;
         ctx.fill();
         ctx.stroke();
         ctx.fillStyle = "white";
@@ -192,7 +192,7 @@ const CanvasComponent = ({ graphData, setGraphData }) => {
         ctx.arc(node.x, node.y, 15, 0, 2 * Math.PI);
         ctx.fillStyle = "black";
         ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 2;
         ctx.fill();
         ctx.stroke();
         ctx.fillStyle = "white";

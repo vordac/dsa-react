@@ -24,7 +24,13 @@ export const addEdge = (adjacencyList, setAdjacencyList) => {
   const node1 = prompt("Enter Node 1");
   const node2 = prompt("Enter Node 2");
   const weight = prompt("Enter Weight");
+
   if (node1 && node2 && weight && node1 !== node2) {
+    if (!adjacencyList.has(node1) || !adjacencyList.has(node2)) {
+      alert("Node or nodes are not in the list.");
+      return;
+    }
+
     setAdjacencyList((prevList) => {
       const newList = new Map(prevList);
       const node1Edges = newList.get(node1) || new Map();

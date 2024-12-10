@@ -1,6 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 
-const CanvasComponent = ({ graphData, setGraphData }) => {
+const CanvasComponent = ({
+  graphData,
+  setGraphData,
+  currentStep,
+  animationQueue,
+  isPlaying,
+}) => {
   const canvasRef = useRef(null);
   const [draggingNode, setDraggingNode] = useState(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -71,9 +77,13 @@ const CanvasComponent = ({ graphData, setGraphData }) => {
 
       // Draw nodes
       nodes.forEach((node) => {
+        const isHighlighted =
+          currentStep < animationQueue.length &&
+          node.id === animationQueue[currentStep][0];
+
         ctx.beginPath();
         ctx.arc(node.x, node.y, 15, 0, 2 * Math.PI);
-        ctx.fillStyle = "black";
+        ctx.fillStyle = isHighlighted ? "red" : "black";
         ctx.strokeStyle = "#ffffff";
         ctx.lineWidth = 2;
         ctx.fill();
@@ -171,6 +181,9 @@ const CanvasComponent = ({ graphData, setGraphData }) => {
     pan,
     isPanning,
     panStart,
+    currentStep,
+    animationQueue,
+    isPlaying,
   ]);
 
   useEffect(() => {
@@ -233,9 +246,13 @@ const CanvasComponent = ({ graphData, setGraphData }) => {
 
       // Draw nodes
       nodes.forEach((node) => {
+        const isHighlighted =
+          currentStep < animationQueue.length &&
+          node.id === animationQueue[currentStep][0];
+
         ctx.beginPath();
         ctx.arc(node.x, node.y, 15, 0, 2 * Math.PI);
-        ctx.fillStyle = "black";
+        ctx.fillStyle = isHighlighted ? "red" : "black";
         ctx.strokeStyle = "#ffffff";
         ctx.lineWidth = 2;
         ctx.fill();
@@ -251,7 +268,7 @@ const CanvasComponent = ({ graphData, setGraphData }) => {
     };
 
     draw();
-  }, [graphData, zoom, pan]);
+  }, [graphData, zoom, pan, currentStep, animationQueue, isPlaying]);
 
   return (
     <canvas

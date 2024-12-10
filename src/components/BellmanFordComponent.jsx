@@ -1,15 +1,16 @@
 import React from "react";
-import { calculateBellmanFord } from "../logic/bellmanFordLogic";
 
-const BellmanFordComponent = ({ adjacencyList, startNode }) => {
-  const { distances, predecessors } = calculateBellmanFord(
-    adjacencyList,
-    startNode
-  );
-
+const BellmanFordComponent = ({
+  distances,
+  predecessors,
+  currentStep,
+  iterationDistances,
+}) => {
   if (!distances) {
     return <div>Graph contains a negative weight cycle</div>;
   }
+
+  const currentDistances = iterationDistances[currentStep] || distances;
 
   return (
     <div className="text-white w-full flex flex-col items-start overflow-auto rounded shadow-md text-center ">
@@ -22,12 +23,14 @@ const BellmanFordComponent = ({ adjacencyList, startNode }) => {
           </tr>
         </thead>
         <tbody>
-          {Array.from(distances.entries()).map(([node, distance]) => (
+          {Array.from(currentDistances.entries()).map(([node, distance]) => (
             <tr key={node}>
               <td className="border border-white p-2">{node}</td>
-              <td className="border border-white p-2">{distance}</td>
               <td className="border border-white p-2">
-                {predecessors.get(node)}
+                {distance === Infinity ? "Inf" : distance}
+              </td>
+              <td className="border border-white p-2">
+                {predecessors.get(node) || "—"}
               </td>
             </tr>
           ))}

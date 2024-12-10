@@ -17,10 +17,6 @@ export const addNode = (adjacencyList, setAdjacencyList) => {
 };
 
 export const addEdge = (adjacencyList, setAdjacencyList) => {
-  if (countEdges(adjacencyList) >= 14) {
-    alert("Maximum number of edges (14) reached.");
-    return;
-  }
   const node1 = prompt("Enter Node 1");
   const node2 = prompt("Enter Node 2");
   const weight = prompt("Enter Weight");
@@ -31,11 +27,17 @@ export const addEdge = (adjacencyList, setAdjacencyList) => {
       return;
     }
 
+    const node1Edges = adjacencyList.get(node1);
+    if (node1Edges.size >= 14) {
+      alert(`Maximum number of edges (14) from node ${node1} reached.`);
+      return;
+    }
+
     setAdjacencyList((prevList) => {
       const newList = new Map(prevList);
-      const node1Edges = newList.get(node1) || new Map();
-      node1Edges.set(node2, weight);
-      newList.set(node1, node1Edges);
+      const newNode1Edges = new Map(node1Edges);
+      newNode1Edges.set(node2, weight);
+      newList.set(node1, newNode1Edges);
       return newList;
     });
   } else {
